@@ -1,0 +1,44 @@
+name: Publish birthday site
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out the site
+        uses: actions/checkout@v4
+
+      - name: Rebuild the media list from the real files
+        run: |
+          node scan-media.js
+          node -e "const fs=require('fs'); const raw=fs.readFileSync('media.js','utf8'); const data=JSON.parse(raw.slice(raw.indexOf('{'), raw.lastIndexOf('}')+1)); if(!data.images.length||!data.videos.length||!data.music.length){ console.error('Picture, RAE VIDS, and Music must be in the repository.'); process.exit(1);} console.log('Publishing', data.images.length, 'photos,', data.videos.length, 'videos,', data.music.length, 'song(s).');"
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

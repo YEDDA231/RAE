@@ -1,0 +1,9 @@
+{
+  "name": "happy-birthday-cy-rae",
+  "private": true,
+  "description": "A little birthday surprise website for CY RAE.",
+  "scripts": {
+    "scan": "node scan-media.js",
+    "start": "node serve.js"
+  }
+}

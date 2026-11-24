@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#12081c">
+  <meta name="description" content="A little birthday surprise for CY RAE.">
+  <title>Happy Birthday, CY RAE</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="locked">
+  <noscript>
+    <div class="noscript">This surprise needs JavaScript turned on. Then refresh the page.</div>
+  </noscript>
+
+  <div class="orb orb-a" aria-hidden="true"></div>
+  <div class="orb orb-b" aria-hidden="true"></div>
+  <div class="orb orb-c" aria-hidden="true"></div>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div id="floaters" aria-hidden="true"></div>
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <button id="music-btn" class="music-btn" type="button" aria-label="Play music">
+    <svg class="note" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+      <path fill="currentColor" d="M9 18.2a2.4 2.4 0 1 1-2-2.36V6.4l10-2.1v8.2a2.4 2.4 0 1 1-2-2.36V7.2L9 8.7v9.5z"/>
+    </svg>
+    <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="music-label">Music</span>
+  </button>
+
+  <header class="topbar">
+    <span class="brand">For CY RAE</span>
+    <nav class="nav" aria-label="Sections">
+      <a href="#intro">Intro</a>
+      <a href="#cake">Cake</a>
+      <a href="#videos">Videos</a>
+      <a href="#message">Note</a>
+      <a href="#poem">Poem</a>
+      <a href="#finale">Finale</a>
+    </nav>
+  </header>
+
+  <section class="welcome" id="welcome">
+    <div class="welcome-card">
+      <p class="eyebrow">A Discord surprise</p>
+      <h1 class="welcome-title">
+        <span class="hey">Hey, CY RAE!</span>
+        <span class="ask">Before you enter, I have a little question...</span>
+      </h1>
+      <form id="age-form" class="age-form">
+        <label for="age">How old are you today?</label>
+        <input id="age" class="age-input" type="number" inputmode="numeric" min="1" max="120" placeholder="Your age" autocomplete="off" aria-describedby="age-error">
+        <p id="age-error" class="form-error" hidden></p>
+        <button id="go-btn" class="btn btn-primary" type="submit">Let's Go!</button>
+      </form>
+      <p class="fine">From a friend on Discord. If the song stays quiet, tap Music in the corner.</p>
+    </div>
+  </section>
+
+  <main id="experience" class="experience">
+    <section id="intro" class="section chapter">
+      <div class="intro-glow" aria-hidden="true"></div>
+      <p class="wait-line">WAIT... IT'S YOUR SPECIAL DAY?!</p>
+      <h2 class="birthday-title"><span id="title-words">HAPPY BIRTHDAY, CY RAE!</span></h2>
+      <p class="subline">Well, someone deserves a little surprise today!</p>
+      <p class="age-note" id="age-note"></p>
+      <p class="scroll-hint">Scroll on, there's more</p>
+    </section>
+
+    <section id="cake" class="section chapter reveal">
+      <p class="eyebrow">Blow them out</p>
+      <h2 class="section-title">The birthday cake</h2>
+      <p class="lede">Press Make a Wish. The candles go out, and the photos spin around the cake — each one gets big up front, then pauses a moment.</p>
+      <div class="cake-stage">
+      <div class="orbit" id="photo-orbit" aria-hidden="true" aria-label="Surprise photos"></div>
+      <div class="cake" id="main-cake">
+        <div class="cake-light" aria-hidden="true"></div>
+        <div class="candles" id="candles"></div>
+        <div class="tier tier-top">
+          <div class="icing"></div>
+          <span class="drip" style="--x:16%"></span>
+          <span class="drip" style="--x:40%"></span>
+          <span class="drip" style="--x:66%"></span>
+          <span class="drip" style="--x:84%"></span>
+          <span class="sprinkles"></span>
+        </div>
+        <div class="tier tier-mid">
+          <div class="icing"></div>
+          <span class="drip" style="--x:12%"></span>
+          <span class="drip" style="--x:34%"></span>
+          <span class="drip" style="--x:58%"></span>
+          <span class="drip" style="--x:78%"></span>
+          <span class="sprinkles"></span>
+          <span class="berry b1"></span>
+          <span class="berry b2"></span>
+          <span class="berry b3"></span>
+          <span class="berry b4"></span>
+        </div>
+        <div class="tier tier-base">
+          <div class="icing"></div>
+          <span class="drip" style="--x:10%"></span>
+          <span class="drip" style="--x:28%"></span>
+          <span class="drip" style="--x:48%"></span>
+          <span class="drip" style="--x:68%"></span>
+          <span class="drip" style="--x:86%"></span>
+          <span class="sprinkles"></span>
+        </div>
+        <div class="plate"></div>
+      </div>
+      </div>
+      <button id="wish-btn" class="btn btn-primary" type="button">Make a Wish!</button>
+      <p id="wish-line" class="wish-line" aria-live="polite"></p>
+    </section>
+
+    <section id="videos" class="section reveal">
+      <p class="eyebrow">Press play</p>
+      <h2 class="section-title">A few little videos</h2>
+      <p class="lede">Tap play, then pause whenever you want. The clips stay exactly as they were.</p>
+      <div class="video-grid" id="video-grid"></div>
+    </section>
+
+    <section id="message" class="section chapter reveal">
+      <p class="eyebrow">A little message</p>
+      <div class="message-card">
+        <p id="message-source" class="sr-only">Hey CY RAE! HAHAHA. We may have just met on Discord, but honestly, it's been really nice talking to you. So I thought I'd make something a little different for your special day. Nothing fancy, just a small surprise to remind you that you deserve to have a wonderful birthday. Keep smiling, keep being yourself, and enjoy your day! Happy Birthday!</p>
+        <p id="message-text" class="message-text" aria-hidden="true"></p>
+      </div>
+      <button id="replay-message" class="btn btn-ghost" type="button">Read it again</button>
+    </section>
+
+    <section id="poem" class="section reveal">
+      <p class="eyebrow">A Birthday Poem</p>
+      <h2 class="poem-title">A Friend Along the Way</h2>
+      <div class="poem-sheet">
+        <p class="poem-stanza" style="--n: 0">We met by chance, just words across a screen,<br>A simple friendship, unexpected but serene.<br>Who knew a stranger could become a friend,<br>Whose laughter makes the hardest days descend?</p>
+        <p class="poem-stanza" style="--n: 1">Perhaps life has its own paths to unfold,<br>With countless stories waiting to be told.<br>And as the years pass by and seasons change,<br>I hope our friendship never feels strange.</p>
+        <p class="poem-stanza" style="--n: 2">We'll grow much older, chasing different dreams,<br>Through winding roads and life's unpredictable streams.<br>We may get busy, and our worlds may drift apart,<br>But I hope you'll always have a place within my heart.</p>
+        <p class="poem-stanza" style="--n: 3">No promises of forever do I need to make,<br>No expectations, no paths we have to take.<br>Just genuine friendship, simple and true,<br>And a little happiness in everything you do.</p>
+        <p class="poem-stanza" style="--n: 4">Someday we'll laugh about the days gone by,<br>The silly conversations that made the hours fly.<br>We'll talk about the memories that brought us here,<br>And smile at how we made it through each year.</p>
+        <p class="poem-stanza" style="--n: 5">So here's a wish beneath the birthday sky,<br>May happiness find you wherever you fly.<br>May all your dreams come closer into view,<br>And may life bring the very best to you.</p>
+        <p class="poem-stanza" style="--n: 6">Happy Birthday, Rae, may your days be bright,<br>May your darkest moments turn to light.<br>And as we grow older, whatever life may send,<br>I hope we still can greet each other as a friend.</p>
+        <p class="poem-close" style="--n: 7">Here's to more birthdays, more laughter, and years ahead. May we grow old, live our own stories, and never forget the friendship that started with a simple hello.</p>
+      </div>
+      <button id="replay-poem" class="btn btn-ghost" type="button">Read it again</button>
+    </section>
+
+    <section id="finale" class="section chapter reveal">
+      <h2 class="finale-title">Once again, HAPPY BIRTHDAY, CY RAE!</h2>
+      <p class="finale-sub">Hope this little website made you smile. Enjoy your special day! 🎂</p>
+      <div class="finale-float">
+        <div class="cake finale-cake" aria-hidden="true">
+          <div class="cake-light"></div>
+          <div class="candles" id="finale-candles"></div>
+          <div class="tier tier-top">
+            <div class="icing"></div>
+            <span class="drip" style="--x:16%"></span>
+            <span class="drip" style="--x:42%"></span>
+            <span class="drip" style="--x:68%"></span>
+            <span class="sprinkles"></span>
+          </div>
+          <div class="tier tier-mid">
+            <div class="icing"></div>
+            <span class="drip" style="--x:18%"></span>
+            <span class="drip" style="--x:46%"></span>
+            <span class="drip" style="--x:74%"></span>
+            <span class="sprinkles"></span>
+            <span class="berry b1"></span>
+            <span class="berry b2"></span>
+            <span class="berry b4"></span>
+          </div>
+          <div class="tier tier-base">
+            <div class="icing"></div>
+            <span class="drip" style="--x:12%"></span>
+            <span class="drip" style="--x:36%"></span>
+            <span class="drip" style="--x:60%"></span>
+            <span class="drip" style="--x:84%"></span>
+            <span class="sprinkles"></span>
+          </div>
+          <div class="plate"></div>
+        </div>
+      </div>
+      <button id="again-btn" class="btn btn-ghost" type="button">One more round</button>
+      <p class="footer-note">Made for CY RAE · a small surprise from a Discord friend</p>
+    </section>
+  </main>
+
+  <script src="media.js"></script>
+  <script src="effects.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
